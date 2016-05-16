@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="entireframework.min.css">
+	<title>...::: La Pelea del Siglo: Knockout a jQuery :::...</title>
+</head>
+<body>
+	<!-- /* View de la lista de entradas vendidas */ -->
+	<div class="container">
+		<h1 style="text-align: center">...::: La Pelea del Siglo: Knockout a jQuery :::...</h1>
+		<table class="table">
+			<thead>
+
+				<th style="text-align: center">Tipo de Entrada</th>
+				<th style="text-align: center">Precio</th>
+				<th style="text-align: center">Cantidad</th>
+				<th style="text-align: center">Subtotal</th>
+				<th style="text-align: center">Opciones</th>
+			</thead>
+			<tbody data-bind="foreach: entradasVendidas">
+				<td width="12%"><select data-bind="options: $parent.catalogo, optionsText: 'tipo', optionsCaption: 'Seleccione', optionsValue: 'precio', value: precio"></select></td>
+				<td width="12%" data-bind="text: formato(precio())"></td>
+				<td width="20%"><input class="smooth" type="number" min="1" data-bind="value: cantidad, attr: {max: $parent.catalogo()[$parent.tipoEntrada(precio())].cantidad}"></td>
+				<td width="10%" data-bind="text: formato(subtotal())"></td>
+				<td width="15%"><button class="btn btn-sm btn-done" data-bind="click: $parent.agregarEntrada">Comprar</button>&nbsp;<button class="btn btn-sm btn-error" data-bind="click: $parent.cancelarEntrada">Cancelar</button></td>
+				<!-- [9] -->
+			</tbody>
+		</table>
+	</div>
+	<script src="knockout-3.4.0.min.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>
