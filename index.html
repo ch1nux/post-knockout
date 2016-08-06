@@ -6,12 +6,11 @@
 	<title>...::: La Pelea del Siglo: Knockout a jQuery :::...</title>
 </head>
 <body>
-	<!-- /* View de la lista de entradas vendidas */ -->
 	<div class="container">
 		<h1 style="text-align: center">...::: La Pelea del Siglo: Knockout a jQuery :::...</h1>
 		<table class="table">
 			<thead>
-
+				<th style="text-align: center">Nombre</th>
 				<th style="text-align: center">Tipo de Entrada</th>
 				<th style="text-align: center">Precio</th>
 				<th style="text-align: center">Cantidad</th>
@@ -19,14 +18,18 @@
 				<th style="text-align: center">Opciones</th>
 			</thead>
 			<tbody data-bind="foreach: entradasVendidas">
-				<td width="12%"><select data-bind="options: $parent.catalogo, optionsText: 'tipo', optionsCaption: 'Seleccione', optionsValue: 'precio', value: precio"></select></td>
-				<td width="12%" data-bind="text: formato(precio())"></td>
-				<td width="20%"><input class="smooth" type="number" min="1" data-bind="value: cantidad, attr: {max: $parent.catalogo()[$parent.tipoEntrada(precio())].cantidad}"></td>
-				<td width="10%" data-bind="text: formato(subtotal())"></td>
-				<td width="15%"><button class="btn btn-sm btn-done" data-bind="click: $parent.agregarEntrada">Comprar</button>&nbsp;<button class="btn btn-sm btn-error" data-bind="click: $parent.cancelarEntrada">Cancelar</button></td>
-				<!-- [9] -->
+				<tr>
+					<td><input class="smooth" type="text" placeholder="Ingrese su nombre" data-bind="disable: vendida, value: nombre, valueUpdate: 'keyup'"></td>
+					<td><select data-bind="disable: vendida(), options: $parent.catalogo, optionsText: 'tipo', optionsCaption: 'Seleccione', optionsValue: 'precio', value: precio, visible: nombre().length > 3"></select></td>
+					<td width="12%" data-bind="text: formato(precio())"></td>
+					<td width="20%"><input class="smooth" type="number" min="1" data-bind="disable: vendida(), visible: precio, value: cantidad, attr: {max: $parent.catalogo()[$parent.tipoEntrada(precio())].cantidad}"></td>
+					<td width="10%" data-bind="text: formato(subtotal())"></td>
+					<td width="15%"><span data-bind="visible: precio"><button class="btn btn-sm btn-done" data-bind="disable: vendida(), click: vendida"><span data-bind="visible: !vendida()">Comprar</span><span data-bind="visible: vendida()">Vendida</span></button></span></td>
+				</tr>
 			</tbody>
-		</table>
+		</table><hr>
+		<button class="btn btn-sm btn-info" data-bind="visible: !ventaCerrada(), click: agregarEntrada">Nueva Venta</button>
+		<button class="btn btn-sm btn-error" data-bind="disable: ventaCerrada(), click: cerrarVenta"><span data-bind="visible: !ventaCerrada()">Cerrar Venta</span><span data-bind="visible: ventaCerrada()">Venta Cerrada</span></button>
 	</div>
 	<script src="knockout-3.4.0.min.js"></script>
 	<script src="app.js"></script>
