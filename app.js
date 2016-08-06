@@ -17,6 +17,16 @@ var Entrada = function () {
 		return (self.precio()) ? self.precio() * self.cantidad() : self.precio();
 	});
 
+	self.cantidad.subscribe(function () { // [6]
+		if (self.cantidad() > 12) {
+			alert("Prohibida la venta a " + self.nombre());
+			self.nombre("");
+			self.precio(undefined);
+			self.cantidad(undefined);
+		} else if (self.cantidad() > 10) {
+			alert("Advertencia, potencial revendedor!");
+		}
+	});
 }
 
 /* ViewModel de Venta de Entradas */
@@ -39,6 +49,7 @@ var Venta = function () {
 		return parseInt(precio) === 450 ? 1 : parseInt(precio) === 650 ? 2 : 0;
 	}
 
+	// [8]
 	var ultimaEntrada = function () {
 		return self.entradasVendidas()[self.entradasVendidas().length - 1];
 	}
@@ -98,5 +109,8 @@ var Venta = function () {
 		}
 	}
 }
+
+// Actualizaciones rápidas de la interfaz (asíncronas)
+ko.options.deferUpdates = true; // [9]
 
 ko.applyBindings(new Venta());
