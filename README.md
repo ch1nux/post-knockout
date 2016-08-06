@@ -10,17 +10,22 @@ Post de jotaeseymas.wordpress.com en el que explico el uso de la librería Knock
 
   + `attr` permite que un atributo HTML específico sea añadido al DOM.
   + `text` permite que un valor aparezca como texto plano dentro del DOM.
+  + `visible` permite que un elemento sea mostrado según una condición.
 
 - **Bindings de control de flujo:**
 
   + `foreach` permite iterar acciones sobre un valor Array (observable o no).
 
 - **Bindings para formularios HTML:**
-
-  + `click` permite añadir listeners el evento *onclick* del DOM.
-  + `value` permite mostrar cualquier valor en el elemento DOM.
-  + `options` permite asignar a un elemento `select` sus valores como Array.
-  + `selectedOptions` permite observar las selecciones en un elemento `select` con opción para selección mútiple.
+  + __Bindings para campos `<input>`__:
+    + `click` permite añadir listeners el evento *onclick* del DOM.
+    + `value` permite mostrar cualquier valor en el elemento DOM.
+    + `disable` permite añadir el atributo *disabled* al elemento DOM.
+  + __Bindings para campos `<select>`__:
+    + `options` permite asignar a un elemento `select` sus valores como Array.
+    + `selectedOptions` permite observar las selecciones en un elemento `<select>` con opción para selección mútiple.
+    + `optionsCaption` permite añadir el texto del estado por default del `<select>`.
+    + `optionsValue` permite seleccionar un atributo del binding como valor de cada `<option>` del `<select>`.
 
 ## Helpers para usar bindings
 
